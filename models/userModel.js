@@ -2,20 +2,11 @@ var mongoose = require('mongoose');
 
 var Schema = mongoose.Schema;
 
-var taskSchema = new Schema({
-    task: String,
-    reportUser: String,
-    respondUser: String,
-    relateUser: String,
-    progress: String,
-    milestone: String,
-    team: String,
-    priority: String,
-    type: String,
-    deadline: Date,
-    hasAttachment: Boolean
+var userSchema = new Schema({
+    user: String,
+    password: String
 })
 
-var Tasks = mongoose.model('Tasks', taskSchema);
+var Users = mongoose.model('Users', userSchema);
 
-module.exports = Tasks;
+module.exports = Users;

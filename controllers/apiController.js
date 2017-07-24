@@ -7,17 +7,19 @@ module.exports = function(app) {
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: true }));
 
-    app.get('/api/tasks/:uname', function(req, res) {
-
-        Todos.find({ username: req.params.uname}, function(err, todos) {
+    // get monthly todo for the user
+    app.get('/api/todo/:uname/:date', function(req, res) {
+        console.log('API/todo/uname/date');
+        Todos.find({ username: req.params.uname, date: req.params.date }, function(err, todos) {
             if (err) throw err;
             res.send(todos);
         });
     });
 
-    // get single todo
-    app.get('/api/todo/:id', function(req, res) {
-        Todos.findById({ _id: req.params.id }, function(err, todo) {
+    // get single todo achievement
+    app.get('/api/todo/:day', function(req, res) {
+        console.log('API/todo/day');
+        Todos.find({ username: 'Tomohiro_Sato', "achievement.day": req.params.day }, function(err, todo) {
             if (err) throw err;
             res.send(todo);
         });
@@ -28,7 +30,7 @@ module.exports = function(app) {
         // if id exists as POST param, update the task
         if (req.body.id) {
             Todos.findByIdAndUpdate(req.body.id, {
-                achievement: req.body.achievement,
+                level: req.body.level,
                 comment: req.body.comment 
             }, function(err, todo) {
                 if(err) throw err;
