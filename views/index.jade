@@ -2,5 +2,9 @@ extends layout
 
 block content
 	div.container
-		h1 Program Name
-		p Hello #{name}
+		table.table.table-striped
+			thead
+				tr
+					each todo in todos
+						th
+							#{todo}

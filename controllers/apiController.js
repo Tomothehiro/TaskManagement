@@ -1,4 +1,5 @@
 var Todos = require('../models/todoModel');
+var Users = require('../models/userModel');
 var bodyParser = require('body-parser');
 
 module.exports = function(app) {
@@ -12,7 +13,7 @@ module.exports = function(app) {
         console.log('API/todo/uname/date');
         Todos.find({ username: req.params.uname, date: req.params.date }, function(err, todos) {
             if (err) throw err;
-            res.send(todos);
+            res.render('..//views/index', {todos:JSON.stringify(todos)});
         });
     });
 
