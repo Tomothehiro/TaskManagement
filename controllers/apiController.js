@@ -11,9 +11,10 @@ module.exports = function(app) {
     // get monthly todo for the user
     app.get('/api/todo/:uname/:date', function(req, res) {
         console.log('API/todo/uname/date');
-        Todos.find({ username: req.params.uname, date: req.params.date }, function(err, todos) {
+        Todos.findOne({ username: req.params.uname, date: req.params.date }, function(err, todos) {
             if (err) throw err;
-            res.render('..//views/index', {todos:JSON.stringify(todos)});
+            const people = ['tomo','tamo'];
+            res.render('..//views/tables', {'todos':todos});
         });
     });
 
